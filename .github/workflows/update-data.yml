@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '*/30 6 * * *' # Every 30 minutes from 6 to midnight
     - cron: '5 0 * * *' # Every day at 5 after midnight
+  workflow_dispatch:
 
 jobs:
   fetch:
