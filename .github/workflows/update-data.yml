@@ -3,6 +3,7 @@ name: Update Data
 on:
   schedule:
     - cron: '*/30 6-23 * * *' # Every 30 minutes from 6 to midnight
+  workflow_dispatch:
 
 jobs:
   fetch:
