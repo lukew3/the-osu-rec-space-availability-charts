@@ -15,5 +15,8 @@ jobs:
         run: sudo apt install -y jq
 
       - name: Get data
-        run: curl https://recsports.osu.edu/fms/Home/GetLocations?locationCode=rpac | jq .locations[] | jq '.locationName, .lastCount'
+        run: >
+          curl https://recsports.osu.edu/fms/Home/GetLocations?locationCode=rpac |
+          jq .locations[] |
+          jq '.locationName, .lastCount'
 
