@@ -23,4 +23,6 @@ jobs:
       - name: Update day
         if: github.event.schedule == '5 0 * * *'
         run: python update.py daily
-
+        
+      - name: Git commit
+        run: git commit -am "-"; git push
