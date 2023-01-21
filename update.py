@@ -26,10 +26,11 @@ def daily():
             line = f1.read()
             f1.seek(0)
             f1.truncate()
-            # Copy today's line to the full file
+            # Move today's line to the full file
             with open(f'data/{facility}/{facility}.csv', 'a') as f2:
                 f2.write("\n")
                 f2.write(line)
+            """
             # Caclulate the new averages
             with open(f'data/{facility}/{facility}_avg.csv', 'r+') as f3:
                 lines = f3.readlines()
@@ -41,13 +42,11 @@ def daily():
                 new_avgs = [(a * weight + b) / (weight + 1) for a, b in zip(avg_data, new_data)]
                 lines[dow] = ','.join(map(str, new_avgs)) + ',' + str(weight + 1) + '\n'
                 f3.write(''.join(lines))
+            """
 
 
 if __name__ == '__main__':
-    print(sys.argv)
     if len(sys.argv) < 2:
         normal()
     elif sys.argv[1] == 'daily':
         daily()
-    else:
-        normal()
