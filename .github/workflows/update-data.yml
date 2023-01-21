@@ -2,7 +2,8 @@ name: Update Data
 
 on:
   schedule:
-    - cron: '*/30 6-23 * * *' # Every 30 minutes from 6 to midnight
+    - cron: '*/30 6 * * *' # Every 30 minutes from 6 to midnight
+    - cron: '5 0 * * *' # Every day at 5 after midnight
   workflow_dispatch:
 
 jobs:
@@ -16,5 +17,10 @@ jobs:
         run: sudo apt install -y jq
 
       - name: Get data
-        run: curl https://recsports.osu.edu/fms/Home/GetLocations?locationCode=rpac | jq .locations[] | jq '.locationName, .lastCount'
+        if: github.event.schedule == '*/30 6 * * *'
+        run: python update.py
+      
+      - name: Update day
+        if: github.event.schedule == '5 0 * * *'
+        run: python update.py daily
 
