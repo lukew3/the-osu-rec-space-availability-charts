@@ -17,7 +17,7 @@ jobs:
         run: sudo apt install -y jq
 
       - name: Get data
-        if: github.event.schedule == '*/30 6 * * *'
+        if: github.event.schedule == '*/30 6-23 * * *'
         run: python update.py
       
       - name: Update day
