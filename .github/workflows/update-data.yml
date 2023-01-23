@@ -4,7 +4,7 @@ on:
   schedule:
     # Shifted back 5 because workflows are on utc-0 and Ohio State is utc-5
     - cron: '*/30 1-18 * * *' # Every 30 minutes from 6 to midnight EST
-    - cron: '5 19 * * *' # Every day at 5 after midnight
+    - cron: '5 19 * * *' # Every day at 5 after midnight EST
   workflow_dispatch:
 
 jobs:
