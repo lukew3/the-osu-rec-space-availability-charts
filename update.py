@@ -17,13 +17,13 @@ def normal():
         with open(f'data/{facility}/{facility}_today.csv', 'a') as f:
             f.write(f"{summ},")
 
-
 def daily():
-    dow = datetime.datetime.today().weekday()
+    now = datetime.datetime.today()
+    dow = now.weekday()
     print(dow)
     for facility in facilities:
         with open(f'data/{facility}/{facility}_today.csv', 'r+') as f1:
-            line = f1.read()
+            line = now.strftime("%Y-%m-%d") + f1.read()
             f1.seek(0)
             f1.truncate()
             # Move today's line to the full file
