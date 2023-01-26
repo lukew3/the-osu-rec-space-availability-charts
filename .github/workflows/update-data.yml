@@ -3,10 +3,9 @@ name: Update Data
 on:
   schedule:
     # Shifted up 5 because workflows are on utc-0 and Ohio State is utc-5
-    # Next 2 crons are every 30 minutes from 6am to midnight EST
+    # Every 30 minutes from 6am to midnight EST
     - cron: '*/30 11-23 * * *'
     - cron: '*/30 0-5 * * *'
-    - cron: '15 5 * * *' # Every day at 15 after midnight EST
   workflow_dispatch:
 
 jobs:
@@ -17,13 +16,8 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Get data
-        if: github.event.schedule != '15 5 * * *'
         run: python update.py
-      
-      - name: Update day
-        if: github.event.schedule == '15 5 * * *'
-        run: python update.py daily
-        
+
       - name: Git commit
         run: |
           git config user.name github-actions[bot]
