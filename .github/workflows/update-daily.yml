@@ -1,0 +1,29 @@
+name: Update Daily
+
+on:
+  schedule:
+    # Shifted up 5 because workflows are on utc-0 and Ohio State is utc-5
+    - cron: '15 5 * * *' # Every day at 15 after midnight EST
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+ 
+      - name: Update day
+        run: python update.py daily
+        
+      - name: Git commit
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git commit -am "Update data"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
