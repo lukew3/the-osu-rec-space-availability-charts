@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: intraday # get intraday branch first
  
       - name: Update day
         run: python update.py daily
@@ -20,7 +22,10 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
-          git commit -am "Update data"
+          git commit -am "Move data"
+          git checkout main
+          git merge --squash intraday
+          git commit -am "Update day"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
