@@ -23,7 +23,7 @@ def daily():
     print(dow)
     for facility in facilities:
         with open(f'data/{facility}/{facility}_today.csv', 'r+') as f1:
-            line = now.strftime("%Y-%m-%d") + f1.read()
+            line = now.strftime("%Y-%m-%d,") + f1.read()
             f1.seek(0)
             f1.truncate()
             # Move today's line to the full file
