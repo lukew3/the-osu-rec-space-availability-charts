@@ -17,6 +17,9 @@ jobs:
         with:
           ref: intraday # work on intraday branch
 
+      - name: Git pull
+        run: git pull
+
       - name: Get data
         run: python update.py
 
