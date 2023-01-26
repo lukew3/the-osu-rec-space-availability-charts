@@ -17,9 +17,6 @@ jobs:
         with:
           ref: intraday # work on intraday branch
 
-      - name: Git pull
-        run: git pull
-
       - name: Get data
         run: python update.py
 
@@ -33,4 +30,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: intraday
