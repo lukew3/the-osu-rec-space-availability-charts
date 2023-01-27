@@ -23,8 +23,13 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
           git commit -am "Move data"
-          git fetch
-          git checkout main
+          
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+      
+      - name: Merge intraday
+        run: |
           git merge --squash intraday
           git commit -am "Update day"
 
