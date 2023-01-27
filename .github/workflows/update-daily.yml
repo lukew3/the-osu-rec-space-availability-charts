@@ -22,29 +22,35 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
-          git commit -am "Move data"
+          git commit -am "Move data from *_today"
           
+      - name: Push intraday
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: intraday
+      
       - uses: actions/checkout@v3
         with:
           ref: main
       
       - name: Merge intraday
         run: |
-          git merge --squash intraday
+          git merge --squash origin/intraday
           git commit -am "Update day"
 
-      - name: Push changes
+      - name: Push main changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: main
 
       - name: Reset intraday branch
         run: |
           git branch -D intraday
           git branch intraday
           
-      - name: Push changes
+      - name: Push intraday changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
