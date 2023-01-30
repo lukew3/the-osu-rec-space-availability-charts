@@ -28,7 +28,7 @@ def daily():
             f1.truncate()
             # Move today's line to the full file
             with open(f'data/{facility}/{facility}.csv', 'a') as f2:
-                # f2.write("\n")
+                f2.write("\n")
                 f2.write(line)
             """
             # Caclulate the new averages
