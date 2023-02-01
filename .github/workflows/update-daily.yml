@@ -36,7 +36,7 @@ jobs:
       
       - name: Merge intraday
         run: |
-          git merge --squash origin/intraday
+          git merge --squash origin/intraday --allow-unrelated-histories
           git commit -am "Update day"
 
       - name: Push main changes
